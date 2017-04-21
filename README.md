@@ -1,2 +1,2 @@
 # Final Project for CPLN611/CPLN620
-visit page at https://github.com/amandayg/gigmap/blob/master/gigmap/gigmap.html
+visit page at https://github.com/amandayg/gigmap/gigmap.html
