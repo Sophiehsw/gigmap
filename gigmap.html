@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Tour Map of Your Band</title>
+  <!-- CSS Imports -->
+  <!--reset,carto,bootstrap,leaflet-->
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/themes/css/cartodb.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+  <link rel="stylesheet" href="css/style.css" />
+
+</head>
+<body>
+  <!--temporary sidebar-->
+  <div class="container">
+      <div class="row">
+        <div class="sidebar">
+          <h2>Your Band's Journey</h2>
+          <!-- <h2 class="h3">From <span style="color:blue">here</span> to <span style="color:red">there</span></h2> -->
+          <label for="artist">Enter the name of the band</label>
+          <input id="artist-name" type="text" placeholder="e.g. Gorillaz"><br></br>
+          <button id="past">See artist's past tours</button><br></br>
+          <button id="future">See artist's upcoming tours</button><br></br>
+          <button id="clear">clear search</button><br></br>
+        </div>
+      </div>
+
+  </div>
+
+  <!-- Map -->
+  <div id="map" class="map"></div>
+
+
+  <!-- Javascript Imports -->
+  <script src="js/moment.js"></script>
+  <!--underscore, jquery,d3,bootstrap,carto,leaflet-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/cartodb.js"></script>
+  <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
