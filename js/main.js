@@ -50,6 +50,8 @@ var searchArtist = function(artistName) {
 //https://github.com/xsaardo/Setlist-fm-Playlists/blob/master/search.js
 
 //Issue: Pagination(how to get all pages)
+//Suggestion: make loop for api call, change page, get number of page by divide total entries with 50(max per page)
+//or other library..explore
 
 //PAST EVENTS
 var getPastVenues = function(artistID){
@@ -71,8 +73,8 @@ var getPastVenues = function(artistID){
       if(venue.location.lat !== null && venue.location.lng !== null){
         var marker = L.circleMarker({lat: venue.location.lat,lng: venue.location.lng} ,  {color: "#20604F"}).bindPopup(venue.location.city).addTo(map);
         lat.push(venue.location.lat);
-        list.push(marker);
         lng.push(venue.location.lng);
+        list.push(marker);
       }
 }) ;
 
