@@ -33,7 +33,7 @@ var list=[], list2=[];
 var searchArtist = function(artistName) {
      return $.ajax({
       type: "GET",
-      url: "https://api.songkick.com/api/3.0/search/artists.json",
+      url: "http://api.songkick.com/api/3.0/search/artists.json",
       data: {
         query: artistName,
         apikey: songkick_api
@@ -57,7 +57,7 @@ var searchArtist = function(artistName) {
 var getPastVenues = function(artistID){
   $.ajax({
     type: "GET",
-    url:"https://api.songkick.com/api/3.0/artists/" + artistID + "&page= "+ "/gigography.json",
+    url:"http://api.songkick.com/api/3.0/artists/" + artistID + "&page= "+ "/gigography.json",
     data: {
       query: artistID,
       // page: 1,
@@ -88,7 +88,7 @@ console.log(lat,lng);
 var getUpcomingVenues = function(artistID){
   $.ajax({
     type: "GET",
-    url:"https://api.songkick.com/api/3.0/artists/" + artistID + "&page= "+ "/calendar.json",
+    url:"http://api.songkick.com/api/3.0/artists/" + artistID + "&page= "+ "/calendar.json",
     data: {
       query: artistID,
       apikey: songkick_api
