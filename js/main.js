@@ -60,7 +60,7 @@ var getPastVenues = function(artistID){
     url:"http://api.songkick.com/api/3.0/artists/" + artistID + "&page= "+ "/gigography.json",
     data: {
       query: artistID,
-      page: 2,
+      // page: 1,
       apikey: songkick_api
     }
   }).done(function(data){
