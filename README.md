@@ -1,2 +1,2 @@
-# Final Project for CPLN611/CPLN620
-visit page at https://amandayg.github.io/gigmap/
+## Final Project for MUSA611 and MUSA620
+###visit page at https://amandayg.github.io/gigmap/
