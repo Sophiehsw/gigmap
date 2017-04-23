@@ -22,6 +22,20 @@ body {
   top: 0;
 }
 
+
+input, button {
+  /*background-color: #A8D8B9;*/
+  /*color:#3A3226;*/
+  border: none;
+  padding: 6px 10px;
+  /*text-align: center;*/
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  font-family: sans-serif;
+  border-radius: 6px;
+}
+
 /*background color: BYAKUGUN*/
 .sidebar {
   position: absolute;
