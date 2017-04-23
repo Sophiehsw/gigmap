@@ -255,6 +255,6 @@ $("#clear").click(function(e) {
 
   $("#artist-name").val('');
   $("#city-name").val('');
-  $('#venue-name').val();
+  $('#venue-name').val('');
   $("#choice").text("Welcome to Gig Map");
 });
