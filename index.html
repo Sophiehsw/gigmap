@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Tour Map of Your Band</title>
+  <title>Gig Map</title>
   <!-- CSS Imports -->
   <!--reset,carto,bootstrap,leaflet-->
   <link rel="stylesheet" href="css/reset.css" />
@@ -17,22 +17,23 @@
   <div class="container">
       <div class="row">
         <div class="sidebar">
-          <h2>Your Band's Journey</h2>
+          <h2 id="choice">Welcome to Gig Map</h2>
           <!-- <h2 class="h3">From <span style="color:blue">here</span> to <span style="color:red">there</span></h2> -->
-          <label for="artist">Enter the name of the band</label>
+          <label for="artist">Enter the name of the artist</label>
           <input id="artist-name" type="text" placeholder="e.g. Gorillaz"><br></br>
           <button id="past">See artist's past tours</button><br></br>
-          <button id="future">See artist's upcoming tours</button><br></br>
-          <button id="clear">clear search</button><br></br>
+          <button id="upcoming-artist">See artist's upcoming tours</button><br></br>
 
           <label for="city">Enter the name of the city</label>
           <input id="city-name" type="text" placeholder="e.g. Philadelphia"><br></br>
-          <button id="city-venue">See popular venues</button><br></br>
+          <!-- <button id="city-venue">See popular venues</button><br></br> -->
           <button id="upcoming-city">See upcoming events in the city</button><br></br>
 
           <label for="venue">Enter the name of the venue</label>
-          <input id="venue-name" type="text" placeholder="e.g. union transfer"><br></br>
+          <input id="venue-name" type="text" placeholder="e.g. Union Transfer"><br></br>
           <button id="upcoming-venue">See upcoming events at this venue</button><br></br>
+
+          <button id="clear">clear search</button><br></br>
         </div>
       </div>
 

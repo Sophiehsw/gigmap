@@ -20,15 +20,16 @@ functions:
 1.search artist by name and get artist id
 2.get past event and location
 3.get future event by artist/venue/...
-4.
+4.select by date and region
+5.animation
 ===================== */
 var songkick_api= '2dleBwWTZC8F4EGh';
-var artistName;
-var artistID;
+var artistName,cityName,venueName;
+var artistID, cityID,venueID;
 
-var lat=[], lat2=[];
-var lng=[], lng2=[];
-var list=[], list2=[];
+var lat=[], lat2=[],lat3=[],lat4=[];
+var lng=[], lng2=[],lng3=[],lng4=[];
+var list=[], list2=[],list3=[],list4=[];
 
 var searchArtist = function(artistName) {
      return $.ajax({
@@ -42,6 +43,7 @@ var searchArtist = function(artistName) {
       console.log(data);
       console.log(data.resultsPage.results.artist[0]["displayName"]);
       artistID = data.resultsPage.results.artist[0]["id"];
+      $("#choice").text(data.resultsPage.results.artist[0]["displayName"]);
       console.log(artistID);
   });
 };
@@ -69,7 +71,6 @@ var getPastVenues = function(artistID){
     console.log(dataReturn);
 
   _.map(dataReturn.resultsPage.results.event, function(venue){
-      //return venue.location.lat;
       if(venue.location.lat !== null && venue.location.lng !== null){
         var marker = L.circleMarker({lat: venue.location.lat,lng: venue.location.lng} ,  {color: "#20604F"}).bindPopup(venue.location.city).addTo(map);
         lat.push(venue.location.lat);
@@ -112,7 +113,97 @@ console.log(lat2,lng2);
   });
 };
 
-//2.Venue
+//2.city
+//location search
+var searchCity = function(cityName) {
+     return $.ajax({
+      type: "GET",
+      url: "https://api.songkick.com/api/3.0/search/locations.json",
+      data: {
+        query: cityName,
+        apikey: songkick_api
+      }
+    }).done(function(data){
+      console.log(data);
+      console.log(data.resultsPage.results.location[0]["metroArea"]["displayName"]);
+      cityID = data.resultsPage.results.location[0]["metroArea"]["id"];
+      $("#choice").text(data.resultsPage.results.location[0]["metroArea"]["displayName"]);
+      console.log(cityID);
+  });
+};
+
+
+//upcoming event search
+var getCityevents = function(cityID){
+  $.ajax({
+    type: "GET",
+    url:"https://api.songkick.com/api/3.0/metro_areas/" + cityID + "&page= "+ "/calendar.json",
+    data: {
+      query: cityID,
+      apikey: songkick_api
+    }
+  }).done(function(data){
+    console.log(data);
+    var dataReturn3 = data;
+    console.log(dataReturn3);
+
+  _.map(dataReturn3.resultsPage.results.event, function(venue){
+      if(venue.location.lat !== null && venue.location.lng !== null){
+        var marker3 = L.circleMarker({lat: venue.location.lat,lng: venue.location.lng} , {color: "#D0104C"}).bindPopup(venue.displayName).addTo(map);
+        lat3.push(venue.location.lat);
+        lng3.push(venue.location.lng);
+        list3.push(marker3);
+      }
+});
+});
+};
+
+//3.venue
+//venue search
+var searchVenue = function(venueName) {
+     return $.ajax({
+      type: "GET",
+      url: "https://api.songkick.com/api/3.0/search/venues.json",
+      data: {
+        query: venueName,
+        apikey: songkick_api
+      }
+    }).done(function(data){
+      console.log(data);
+      console.log(data.resultsPage.results.venue[0]["displayName"]);
+      venueID = data.resultsPage.results.venue[0]["id"];
+      var venueMarker = L.circleMarker({lat: data.resultsPage.results.venue[0]["lat"],lng: data.resultsPage.results.venue[0]["lng"]} , {color: "#F05E1C"}).bindPopup(data.resultsPage.results.venue[0]["displayName"]).addTo(map);
+      list4.push(venueMarker);
+      $("#choice").text(data.resultsPage.results.venue[0]["displayName"]);
+      console.log(venueID);
+  });
+};
+
+//upcoming event search
+var getVenueevents = function(venueID){
+  $.ajax({
+    type: "GET",
+    url:"https://api.songkick.com/api/3.0/venues/" + venueID + "&page= "+ "/calendar.json",
+    data: {
+      query: venueID,
+      apikey: songkick_api
+    }
+  }).done(function(data){
+    console.log(data);
+    var dataReturn4 = data;
+    console.log(dataReturn4);
+
+  _.map(dataReturn4.resultsPage.results.event, function(venue){
+      if(venue.venue.lat !== null && venue.venue.lng !== null){
+        // var marker4 = L.circleMarker({lat: venue.venue.lat,lng: venue.venue.lng} , {color: "#D0104C"}).bindPopup(venue.performance.displayName).addTo(map);
+        // lat4.push(venue.venue.lat);
+        // lng4.push(venue.venue.lng);
+        // list4.push(marker4);
+      }
+});
+});
+};
+
 
 //past button
 $("#past").click(function(e) {
@@ -122,11 +213,27 @@ $("#past").click(function(e) {
   });
 });
 
-//upcoming button
-$("#future").click(function(e) {
+//future button
+$("#upcoming-artist").click(function(e) {
   artistName= $('#artist-name').val();
   searchArtist(artistName).done(function(){
     getUpcomingVenues(artistID);
+  });
+});
+
+//city button
+$("#upcoming-city").click(function(e) {
+  cityName= $('#city-name').val();
+  searchCity(cityName).done(function(){
+    getCityevents(cityID);
+  });
+});
+
+//venue button
+$("#upcoming-venue").click(function(e) {
+  venueName= $('#venue-name').val();
+  searchVenue(venueName).done(function(){
+    getVenueevents(venueID);
   });
 });
 
@@ -138,6 +245,16 @@ $("#clear").click(function(e) {
   _.each(list2,function(marker) {
     map.removeLayer(marker);
   });
+  _.each(list3,function(marker) {
+    map.removeLayer(marker);
+  });
+
+  _.each(list4,function(marker) {
+    map.removeLayer(marker);
+  });
 
   $("#artist-name").val('');
+  $("#city-name").val('');
+  $('#venue-name').val();
+  $("#choice").text("Welcome to Gig Map");
 });

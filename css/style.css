@@ -22,8 +22,10 @@ body {
   top: 0;
 }
 
+/*background color: BYAKUGUN*/
 .sidebar {
   position: absolute;
+  background-color: #78C2C4;
   left: 0px;
   width: 340px;
   top: 0;
@@ -31,4 +33,15 @@ body {
   padding: 20px;
   overflow: hidden;
   overflow-y: auto;
+}
+
+#choice{
+  position:relative;
+  top:-20px;
+  font-family: Franklin Gothic Demi Cond, serif;
+  font-weight: bold;
+}
+#clear{
+  position: absolute;
+  bottom: 45px;
 }
