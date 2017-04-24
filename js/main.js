@@ -115,7 +115,7 @@ var getUpcomingVenues = function(artistID){
 
   _.map(dataReturn2.resultsPage.results.event, function(venue){
       if(venue.location.lat !== null && venue.location.lng !== null){
-        var marker2 = L.circleMarker({lat: venue.location.lat,lng: venue.location.lng} , {color: "#D0104C",fillColor: "#D0104C"}).bindPopup(venue.location.city).addTo(map);
+        var marker2 = L.circleMarker({lat: venue.location.lat,lng: venue.location.lng} , {color: "#D0104C",fillColor: "#D0104C"}).bindPopup(venue.location.city + " " + venue.start.date).addTo(map);
         marker2.setRadius(6);
         lat2.push(venue.location.lat);
         lng2.push(venue.location.lng);

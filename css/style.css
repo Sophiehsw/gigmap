@@ -16,7 +16,7 @@ body {
 
 .map {
   position: absolute;
-  left: 340px;
+  left: 325px;
   right: 0;
   bottom: 0;
   top: 0;
@@ -39,9 +39,9 @@ input, button,select {
 
 .sidebar {
   position: absolute;
-  background-color: #A8D8B9;
+  background-color: #8EC7CC;
   left: 0px;
-  width: 340px;
+  width: 325px;
   top: 0;
   bottom: 0;
   padding: 20px;
