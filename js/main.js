@@ -37,6 +37,7 @@ functions:
 var songkick_api= '2dleBwWTZC8F4EGh';
 var artistName,cityName,venueName;
 var artistID, cityID,venueID;
+var dataReturn;
 
 var lat=[], lat2=[],lat3=[],lat4=[];
 var lng=[], lng2=[],lng3=[],lng4=[];
@@ -67,23 +68,24 @@ var searchArtist = function(artistName) {
 //or other library..explore
 
 //PAST EVENTS
-var getPastVenues = function(artistID){
+var getPastVenues = function(artistID,page){
   $.ajax({
     type: "GET",
     url:"https://api.songkick.com/api/3.0/artists/" + artistID + "&page= "+ "/gigography.json",
     data: {
       query: artistID,
-      // page: 1,
+      page: page,
       apikey: songkick_api
     }
   }).done(function(data){
     console.log(data);
-    var dataReturn = data;
+    dataReturn = data;
     console.log(dataReturn);
+
 
   _.map(dataReturn.resultsPage.results.event, function(venue){
       if(venue.location.lat !== null && venue.location.lng !== null){
-        var marker = L.circleMarker({lat: venue.location.lat,lng: venue.location.lng} , {color: "#22f3f1", fillColor: "#22f3f1"}).bindPopup(venue.location.city + " " + venue.start.date).addTo(map);
+        var marker = L.circleMarker({lat: venue.location.lat,lng: venue.location.lng} , {color: "#A8D8B9", fillColor: "#A8D8B9"}).bindPopup(venue.location.city + " " + venue.start.date).addTo(map);
         marker.setRadius(6);
         lat.push(venue.location.lat);
         lng.push(venue.location.lng);
@@ -226,8 +228,9 @@ $("#past").click(function(e) {
   map.setView([22.349052, 17.396109], 2);
   artistName= $('#artist-name').val();
   searchArtist(artistName).done(function(){
-    getPastVenues(artistID);
+    getPastVenues(artistID,1);
   });
+
 });
 
 //future button

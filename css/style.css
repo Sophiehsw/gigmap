@@ -23,7 +23,7 @@ body {
 }
 
 
-input, button {
+input, button,select {
   /*background-color: #A8D8B9;*/
   /*color:#3A3226;*/
   border: none;
@@ -39,7 +39,7 @@ input, button {
 
 .sidebar {
   position: absolute;
-  background-color: #0dd4b9;
+  background-color: #A8D8B9;
   left: 0px;
   width: 340px;
   top: 0;
