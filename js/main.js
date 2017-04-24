@@ -1,16 +1,27 @@
 // Leaflet map setup
-var map = L.map('map', {
-  center: [28.295883, -9.135754],
-  zoom: 1.5
+// var map = L.map('map', {
+//   center: [28.295883, -9.135754],
+//   zoom: 1.5
+// });
+//
+// var Stamen_TonerLite = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
+//   attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+//   subdomains: 'abcd',
+//   minZoom: 0,
+//   maxZoom: 20,
+//   ext: 'png'
+// }).addTo(map);
+
+var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',{
+  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
 });
 
-var Stamen_TonerLite = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
-  attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-  subdomains: 'abcd',
-  minZoom: 0,
-  maxZoom: 20,
-  ext: 'png'
-}).addTo(map);
+var map = L.map('map',{
+  center: [22.349052, 17.396109],
+  zoom: 2
+}).addLayer(tiles);
+// .setView([22.349052, 17.396109], 2);
+//ref: https://github.com/chriswhong/nyctaxi
 
 /* =====================
 setlist.fm api: c78418f6-21c9-4878-80bd-f28f32fbb934
@@ -72,7 +83,8 @@ var getPastVenues = function(artistID){
 
   _.map(dataReturn.resultsPage.results.event, function(venue){
       if(venue.location.lat !== null && venue.location.lng !== null){
-        var marker = L.circleMarker({lat: venue.location.lat,lng: venue.location.lng} ,  {color: "#20604F"}).bindPopup(venue.location.city).addTo(map);
+        var marker = L.circleMarker({lat: venue.location.lat,lng: venue.location.lng} , {color: "#22f3f1", fillColor: "#22f3f1"}).bindPopup(venue.location.city + " " + venue.start.date).addTo(map);
+        marker.setRadius(6);
         lat.push(venue.location.lat);
         lng.push(venue.location.lng);
         list.push(marker);
@@ -101,7 +113,8 @@ var getUpcomingVenues = function(artistID){
 
   _.map(dataReturn2.resultsPage.results.event, function(venue){
       if(venue.location.lat !== null && venue.location.lng !== null){
-        var marker2 = L.circleMarker({lat: venue.location.lat,lng: venue.location.lng} , {color: "#D0104C"}).bindPopup(venue.location.city).addTo(map);
+        var marker2 = L.circleMarker({lat: venue.location.lat,lng: venue.location.lng} , {color: "#D0104C",fillColor: "#D0104C"}).bindPopup(venue.location.city).addTo(map);
+        marker2.setRadius(6);
         lat2.push(venue.location.lat);
         lng2.push(venue.location.lng);
         list2.push(marker2);
@@ -149,7 +162,9 @@ var getCityevents = function(cityID){
 
   _.map(dataReturn3.resultsPage.results.event, function(venue){
       if(venue.location.lat !== null && venue.location.lng !== null){
-        var marker3 = L.circleMarker({lat: venue.location.lat,lng: venue.location.lng} , {color: "#D0104C"}).bindPopup(venue.displayName).addTo(map);
+        var marker3 = L.circleMarker({lat: venue.location.lat,lng: venue.location.lng} , {color:"#E9CD4C", fillColor: "#E9CD4C"}).bindPopup(venue.displayName).addTo(map);
+        marker3.setRadius(6);
+        map.setView({lat: venue.location.lat,lng: venue.location.lng}, 12);
         lat3.push(venue.location.lat);
         lng3.push(venue.location.lng);
         list3.push(marker3);
@@ -172,7 +187,8 @@ var searchVenue = function(venueName) {
       console.log(data);
       console.log(data.resultsPage.results.venue[0]["displayName"]);
       venueID = data.resultsPage.results.venue[0]["id"];
-      var venueMarker = L.circleMarker({lat: data.resultsPage.results.venue[0]["lat"],lng: data.resultsPage.results.venue[0]["lng"]} , {color: "#F05E1C"}).bindPopup(data.resultsPage.results.venue[0]["displayName"]).addTo(map);
+      var venueMarker = L.circleMarker({lat: data.resultsPage.results.venue[0]["lat"],lng: data.resultsPage.results.venue[0]["lng"]} , {color:"#F05E1C",fillColor: "#F05E1C"}).bindPopup(data.resultsPage.results.venue[0]["displayName"]).addTo(map);
+      map.setView({lat: data.resultsPage.results.venue[0]["lat"],lng: data.resultsPage.results.venue[0]["lng"]}, 14);
       list4.push(venueMarker);
       $("#choice").text(data.resultsPage.results.venue[0]["displayName"]);
       console.log(venueID);
@@ -207,6 +223,7 @@ var getVenueevents = function(venueID){
 
 //past button
 $("#past").click(function(e) {
+  map.setView([22.349052, 17.396109], 2);
   artistName= $('#artist-name').val();
   searchArtist(artistName).done(function(){
     getPastVenues(artistID);
@@ -215,6 +232,7 @@ $("#past").click(function(e) {
 
 //future button
 $("#upcoming-artist").click(function(e) {
+  map.setView([22.349052, 17.396109], 2);
   artistName= $('#artist-name').val();
   searchArtist(artistName).done(function(){
     getUpcomingVenues(artistID);
@@ -257,4 +275,5 @@ $("#clear").click(function(e) {
   $("#city-name").val('');
   $('#venue-name').val('');
   $("#choice").text("Welcome to Gig Map");
+  map.setView([22.349052, 17.396109], 2);
 });

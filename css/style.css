@@ -36,10 +36,10 @@ input, button {
   border-radius: 6px;
 }
 
-/*background color: BYAKUGUN*/
+
 .sidebar {
   position: absolute;
-  background-color: #78C2C4;
+  background-color: #0dd4b9;
   left: 0px;
   width: 340px;
   top: 0;
