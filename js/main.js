@@ -43,10 +43,11 @@ var lat=[], lat2=[],lat3=[],lat4=[];
 var lng=[], lng2=[],lng3=[],lng4=[];
 var list=[], list2=[],list3=[],list4=[];
 
+
 var searchArtist = function(artistName) {
      return $.ajax({
       type: "GET",
-      url: "https://api.songkick.com/api/3.0/search/artists.json",
+      url: "https://cors-anywhere.herokuapp.com/api.songkick.com/api/3.0/search/artists.json",
       data: {
         query: artistName,
         apikey: songkick_api
@@ -67,25 +68,52 @@ var searchArtist = function(artistName) {
 //Suggestion: make loop for api call, change page, get number of page by divide total entries with 50(max per page)
 //or other library..explore
 
+var page =1;
+var totalPage;
 //PAST EVENTS
-var getPastVenues = function(artistID,page){
+var gettotalPage = function(artistID){
+  $.ajax({
+  type: "GET",
+  url:"https://cors-anywhere.herokuapp.com/api.songkick.com/api/3.0/artists/" + artistID + "/gigography.json",
+  data: {
+    query: artistID,
+    // page: page,
+    apikey: songkick_api
+  }
+}).done(function(data){
+  //console.log(data);
+  //console.log(page);
+  totalPage = parseInt((data.resultsPage.totalEntries)/50);
+  console.log(totalPage);
+});
+};
+
+
+var getPastVenues = function(artistID, page){
   $.ajax({
     type: "GET",
-    url:"https://api.songkick.com/api/3.0/artists/" + artistID + "&page= "+ "/gigography.json",
+    url:"https://cors-anywhere.herokuapp.com/api.songkick.com/api/3.0/artists/" + artistID + "&page=" + "/gigography.json",
     data: {
       query: artistID,
       page: page,
       apikey: songkick_api
     }
   }).done(function(data){
-    console.log(data);
+    //console.log(data);
+    //console.log(page);
+    // if (totalPage > 1 && page < totalPage){
+    //   page = page+1;
+    // getPastVenues(artistID,page);
+    // console.log(page);
+    // }
     dataReturn = data;
-    console.log(dataReturn);
-
+    //console.log(dataReturn);
 
   _.map(dataReturn.resultsPage.results.event, function(venue){
       if(venue.location.lat !== null && venue.location.lng !== null){
-        var marker = L.circleMarker({lat: venue.location.lat,lng: venue.location.lng} , {color: "#A8D8B9", fillColor: "#A8D8B9"}).bindPopup(venue.location.city + " " + venue.start.date).addTo(map);
+        var marker = L.circleMarker({lat: venue.location.lat,lng: venue.location.lng} ,
+          {color: "#A8D8B9", fillColor: "#A8D8B9"}
+        ).bindPopup(venue.location.city + " " + venue.start.date).addTo(map);
         marker.setRadius(6);
         lat.push(venue.location.lat);
         lng.push(venue.location.lng);
@@ -93,9 +121,17 @@ var getPastVenues = function(artistID,page){
       }
 }) ;
 
-console.log(lat,lng);
+//console.log(lat,lng);
 
   });
+};
+
+var getPast = function(artistID, totalPage){
+  if (totalPage > 1 && page < totalPage){
+    page = page+1;
+  getPastVenues(artistID,page);
+  console.log(page);
+  }
 };
 
 //UPCOMING EVENTS
@@ -103,7 +139,7 @@ console.log(lat,lng);
 var getUpcomingVenues = function(artistID){
   $.ajax({
     type: "GET",
-    url:"https://api.songkick.com/api/3.0/artists/" + artistID + "&page= "+ "/calendar.json",
+    url:"https://cors-anywhere.herokuapp.com/api.songkick.com/api/3.0/artists/" + artistID + "&page= "+ "/calendar.json",
     data: {
       query: artistID,
       apikey: songkick_api
@@ -115,7 +151,9 @@ var getUpcomingVenues = function(artistID){
 
   _.map(dataReturn2.resultsPage.results.event, function(venue){
       if(venue.location.lat !== null && venue.location.lng !== null){
-        var marker2 = L.circleMarker({lat: venue.location.lat,lng: venue.location.lng} , {color: "#D0104C",fillColor: "#D0104C"}).bindPopup(venue.location.city + " " + venue.start.date).addTo(map);
+        var marker2 = L.circleMarker({lat: venue.location.lat,lng: venue.location.lng} ,
+          {color: "#D0104C",fillColor: "#D0104C"}
+        ).bindPopup(venue.location.city + " " + venue.start.date).addTo(map);   //url to songkick event page: venue.uri
         marker2.setRadius(6);
         lat2.push(venue.location.lat);
         lng2.push(venue.location.lng);
@@ -133,7 +171,7 @@ console.log(lat2,lng2);
 var searchCity = function(cityName) {
      return $.ajax({
       type: "GET",
-      url: "https://api.songkick.com/api/3.0/search/locations.json",
+      url: "https://cors-anywhere.herokuapp.com/api.songkick.com/api/3.0/search/locations.json",
       data: {
         query: cityName,
         apikey: songkick_api
@@ -152,7 +190,7 @@ var searchCity = function(cityName) {
 var getCityevents = function(cityID){
   $.ajax({
     type: "GET",
-    url:"https://api.songkick.com/api/3.0/metro_areas/" + cityID + "&page= "+ "/calendar.json",
+    url:"https://cors-anywhere.herokuapp.com/api.songkick.com/api/3.0/metro_areas/" + cityID + "&page= "+ "/calendar.json",
     data: {
       query: cityID,
       apikey: songkick_api
@@ -180,7 +218,7 @@ var getCityevents = function(cityID){
 var searchVenue = function(venueName) {
      return $.ajax({
       type: "GET",
-      url: "https://api.songkick.com/api/3.0/search/venues.json",
+      url: "https://cors-anywhere.herokuapp.com/api.songkick.com/api/3.0/search/venues.json",
       data: {
         query: venueName,
         apikey: songkick_api
@@ -201,7 +239,7 @@ var searchVenue = function(venueName) {
 var getVenueevents = function(venueID){
   $.ajax({
     type: "GET",
-    url:"https://api.songkick.com/api/3.0/venues/" + venueID + "&page= "+ "/calendar.json",
+    url:"https://cors-anywhere.herokuapp.com/api.songkick.com/api/3.0/venues/" + venueID + "&page= "+ "/calendar.json",
     data: {
       query: venueID,
       apikey: songkick_api
@@ -228,9 +266,12 @@ $("#past").click(function(e) {
   map.setView([22.349052, 17.396109], 2);
   artistName= $('#artist-name').val();
   searchArtist(artistName).done(function(){
-    getPastVenues(artistID,1);
-  });
+    gettotalPage(artistID);
+  }).done(function(){
+    getPastVenues(artistID,page);
 
+
+});
 });
 
 //future button
