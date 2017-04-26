@@ -70,6 +70,7 @@ var searchArtist = function(artistName) {
 
 var page =1;
 var totalPage;
+
 //PAST EVENTS
 var gettotalPage = function(artistID){
   $.ajax({
@@ -88,8 +89,7 @@ var gettotalPage = function(artistID){
 });
 };
 
-
-var getPastVenues = function(artistID, page){
+var getPastVenues = function(artistID){
   $.ajax({
     type: "GET",
     url:"https://cors-anywhere.herokuapp.com/api.songkick.com/api/3.0/artists/" + artistID + "&page=" + "/gigography.json",
@@ -103,7 +103,7 @@ var getPastVenues = function(artistID, page){
     //console.log(page);
     if (totalPage > 1 && page < totalPage){
       page = page+1;
-    getPastVenues(artistID,page);
+    getPastVenues(artistID,totalPage);
     console.log(page);
     }
     dataReturn = data;
@@ -126,13 +126,13 @@ var getPastVenues = function(artistID, page){
   });
 };
 
-var getPast = function(artistID, totalPage){
-  if (totalPage > 1 && page < totalPage){
-    page = page+1;
-  getPastVenues(artistID,page);
-  console.log(page);
-  }
-};
+// var getPast = function(artistID, totalPage){
+//   if (totalPage > 1 && page < totalPage){
+//     page = page+1;
+//   getPastVenues();
+//   console.log(page);
+//   }
+// };
 
 //UPCOMING EVENTS
 //1.Artist
@@ -267,8 +267,7 @@ $("#past").click(function(e) {
   artistName= $('#artist-name').val();
   searchArtist(artistName).done(function(){
     gettotalPage(artistID);
-  }).done(function(){
-    getPastVenues(artistID,page);
+    getPastVenues(artistID);
 
 
 });
