@@ -101,11 +101,11 @@ var getPastVenues = function(artistID, page){
   }).done(function(data){
     //console.log(data);
     //console.log(page);
-    // if (totalPage > 1 && page < totalPage){
-    //   page = page+1;
-    // getPastVenues(artistID,page);
-    // console.log(page);
-    // }
+    if (totalPage > 1 && page < totalPage){
+      page = page+1;
+    getPastVenues(artistID,page);
+    console.log(page);
+    }
     dataReturn = data;
     //console.log(dataReturn);
 
