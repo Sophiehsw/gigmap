@@ -300,6 +300,7 @@ $("#upcoming-venue").click(function(e) {
 
 //clear button
 $("#clear").click(function(e) {
+  page=1;
   _.each(list,function(marker) {
     map.removeLayer(marker);
   });
