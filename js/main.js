@@ -45,7 +45,7 @@ var searchArtist = function(artistName) {
       }
     }).done(function(data){
       console.log(data);
-      if(data.resultsPage.totalEntries === 0){
+      if(data.resultsPage.totalEntries === 0 ||data.resultsPage.results.artist[0]["displayName"]==='私立恵比寿中学'){
         $('#alert').show();
       }
       else{
