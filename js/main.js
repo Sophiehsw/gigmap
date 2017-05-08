@@ -33,6 +33,7 @@ var list=[], list2=[],list3=[],list4=[];
 var newLine,newLine2;
 var forClear=[],forClear2=[],forClear3=[],forClear4=[];
 
+$('#alert').hide();
 
 var searchArtist = function(artistName) {
      return $.ajax({
@@ -44,10 +45,15 @@ var searchArtist = function(artistName) {
       }
     }).done(function(data){
       console.log(data);
+      if(data.resultsPage.totalEntries === 0){
+        $('#alert').show();
+      }
+      else{
       console.log(data.resultsPage.results.artist[0]["displayName"]);
       artistID = data.resultsPage.results.artist[0]["id"];
       $("#choice").text(data.resultsPage.results.artist[0]["displayName"]);
       console.log(artistID);
+    }
   });
 };
 
@@ -63,12 +69,10 @@ var gettotalPage = function(artistID){
   url:"https://cors-anywhere.herokuapp.com/api.songkick.com/api/3.0/artists/" + artistID + "/gigography.json",
   data: {
     query: artistID,
-    // page: page,
     apikey: songkick_api
   }
 }).done(function(data){
-  //console.log(data);
-  //console.log(page);
+
   totalPage = parseInt((data.resultsPage.totalEntries)/50);
   console.log(totalPage);
 });
@@ -84,8 +88,6 @@ var getPastVenues = function(artistID){
       apikey: songkick_api
     }
   }).done(function(data){
-    //console.log(data);
-    //console.log(page);
     if (totalPage > 1 && page < totalPage){
       page = page+1;
     getPastVenues(artistID,totalPage);
@@ -127,6 +129,10 @@ var getUpcomingVenues = function(artistID){
     }
   }).done(function(data){
     console.log(data);
+    if(data.resultsPage.totalEntries === 0){
+      $('#alert').show();
+    }
+
     var dataReturn2 = data;
     console.log(dataReturn2);
 
@@ -184,6 +190,9 @@ var getCityevents = function(cityID){
     }
   }).done(function(data){
     console.log(data);
+    if(data.resultsPage.totalEntries === 0){
+      $('#alert').show();
+    }
     var dataReturn3 = data;
     console.log(dataReturn3);
 
@@ -214,6 +223,9 @@ var searchVenue = function(venueName) {
       }
     }).done(function(data){
       console.log(data);
+      if(data.resultsPage.totalEntries === 0){
+        $('#alert').show();
+      }
       console.log(data.resultsPage.results.venue[0]["displayName"]);
       venueID = data.resultsPage.results.venue[0]["id"];
       var venueMarker = L.circleMarker({lat: data.resultsPage.results.venue[0]["lat"],lng: data.resultsPage.results.venue[0]["lng"]} , {color:"#F05E1C",fillColor: "#F05E1C"}).bindPopup(data.resultsPage.results.venue[0]["displayName"]).addTo(map);

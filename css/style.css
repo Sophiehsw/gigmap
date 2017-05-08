@@ -42,14 +42,10 @@ button,select {
   border-radius: 6px;
 }
 
-#city-name{
+input{
   width:175px;
 }
 
-#venue-name{
-    width:150px;
-    font-size:12px;
-}
 .sidebar {
   position: absolute;
   background-color: #8EC7CC;
