@@ -138,12 +138,18 @@ var getUpcomingVenues = function(artistID){
       if(venue.location.lat !== null && venue.location.lng !== null){
         var marker2 = L.circleMarker({lat: venue.location.lat,lng: venue.location.lng} ,
           {color: "#D0104C",fillColor: "#D0104C"}
-        ).bindPopup(venue.location.city + " " + venue.start.date).addTo(map);   //url to songkick event page: venue.uri
-        marker2.setRadius(6);
+        ).bindPopup(venue.location.city + " " + venue.start.date)  //url to songkick event page: venue.uri
         var latlng2 = [venue.location.lat,venue.location.lng];
         console.log(latlng2);
         list2.push(latlng2);
         console.log(list2);
+        marker2.setRadius(6);
+window.setInterval(function() {
+    marker2.setLatLng(list2);
+},50);
+
+marker2.addTo(map);
+
         newLine2 = L.polyline(list2, {color: "#D0104C"}).addTo(map);
         forClear2.push(marker2,newLine2);
       }
