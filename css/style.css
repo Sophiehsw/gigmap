@@ -1,7 +1,13 @@
+
 body {
     padding: 0;
     font-family: helvetica, arial, sans-serif;
     overflow: hidden;
+}
+.btn-group{
+  position: relative;
+  top:-10px;
+  bottom: 20px;
 }
 
 .header {
@@ -23,7 +29,7 @@ body {
 }
 
 
-input, button,select {
+button,select {
   /*background-color: #A8D8B9;*/
   /*color:#3A3226;*/
   border: none;
@@ -36,7 +42,14 @@ input, button,select {
   border-radius: 6px;
 }
 
+#city-name{
+  width:175px;
+}
 
+#venue-name{
+    width:150px;
+    font-size:12px;
+}
 .sidebar {
   position: absolute;
   background-color: #8EC7CC;

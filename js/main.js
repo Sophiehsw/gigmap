@@ -7,8 +7,6 @@ var map = L.map('map',{
   center: [22.349052, 17.396109],
   zoom: 2
 }).addLayer(tiles);
-// .setView([22.349052, 17.396109], 2);
-//ref: https://github.com/chriswhong/nyctaxi
 
 /* =====================
 setlist.fm api: c78418f6-21c9-4878-80bd-f28f32fbb934
@@ -21,6 +19,10 @@ functions:
 4.select by date and region
 5.animation: window setinterval
 6.zoom to point on click
+reference:
+https://www.mapbox.com/mapbox.js/example/v1.0.0/animating-flight-paths/
+https://github.com/odelevingne/gigLister/blob/master/src/scripts/songkick.js
+https://github.com/xsaardo/Setlist-fm-Playlists/blob/master/search.js
 ===================== */
 var songkick_api= '2dleBwWTZC8F4EGh';
 var artistName,cityName,venueName;
@@ -29,7 +31,7 @@ var dataReturn;
 
 var list=[], list2=[],list3=[],list4=[];
 var newLine,newLine2;
-var forClear=[],forClear2=[];
+var forClear=[],forClear2=[],forClear3=[],forClear4=[];
 
 
 var searchArtist = function(artistName) {
@@ -49,17 +51,12 @@ var searchArtist = function(artistName) {
   });
 };
 
-//Ref: https://github.com/odelevingne/gigLister/blob/master/src/scripts/songkick.js
-//https://github.com/xsaardo/Setlist-fm-Playlists/blob/master/search.js
-
-//Issue: Pagination(how to get all pages)
-//Suggestion: make loop for api call, change page, get number of page by divide total entries with 50(max per page)
-//or other library..explore
 
 var page =1;
 var totalPage;
 
 //PAST EVENTS
+//pagination
 var gettotalPage = function(artistID){
   $.ajax({
   type: "GET",
@@ -100,15 +97,15 @@ var getPastVenues = function(artistID){
   _.map(dataReturn.resultsPage.results.event, function(venue){
       if(venue.location.lat !== null && venue.location.lng !== null){
         var marker = L.circleMarker({lat: venue.location.lat,lng: venue.location.lng} ,
-          {color: "#A8D8B9", fillColor: "#A8D8B9",weight:0.5}
+          {color: "#A8D8B9", fillColor: "#A8D8B9",weight:2,fillOpacity:0.5}
         ).bindPopup(venue.location.city + " " + venue.start.date).addTo(map);
         marker.setRadius(6);
         var latlng = [venue.location.lat,venue.location.lng];
-        console.log(latlng);
+        //console.log(latlng);
         list.push(latlng);
-        console.log(list);
-        newLine = L.polyline(list, {color: "#A8D8B9", weight: 0.5}).addTo(map);
-        forClear.push(marker,newLine);
+        //console.log(list);
+        //newLine = L.polyline(list, {color: "#A8D8B9", weight: 0.5}).addTo(map);
+        forClear.push(marker);//,newLine);
         //map.flyTo({lat:venue.location.lat, lng:venue.location.lng},5,0.5);
 
       }
@@ -136,7 +133,7 @@ var getUpcomingVenues = function(artistID){
   _.map(dataReturn2.resultsPage.results.event, function(venue){
       if(venue.location.lat !== null && venue.location.lng !== null){
         var marker2 = L.circleMarker({lat: venue.location.lat,lng: venue.location.lng} ,
-          {color: "#D0104C",fillColor: "#D0104C", weight:0.5}
+          {color: "#D0104C",fillColor: "#D0104C", weight:2.5,fillOpacity:0.3}
         ).bindPopup(venue.location.city + " " + venue.start.date).addTo(map);  //url to songkick event page: venue.uri
         var latlng2 = [venue.location.lat,venue.location.lng];
         console.log(latlng2);
@@ -148,8 +145,7 @@ var getUpcomingVenues = function(artistID){
 // },50);
 //
 // marker2.addTo(map);
-
-        newLine2 = L.polyline(list2, {color: "#D0104C", weight:0.5}).addTo(map);
+        newLine2 = L.polyline(list2, {color: "#D0104C", weight:1}).addTo(map);
         forClear2.push(marker2,newLine2);
       }
 });
@@ -196,9 +192,11 @@ var getCityevents = function(cityID){
         var marker3 = L.circleMarker({lat: venue.location.lat,lng: venue.location.lng} , {color:"#E9CD4C", fillColor: "#E9CD4C"}).bindPopup(venue.displayName).addTo(map);
         marker3.setRadius(6);
         map.setView({lat: venue.location.lat,lng: venue.location.lng}, 12);
-        lat3.push(venue.location.lat);
-        lng3.push(venue.location.lng);
-        list3.push(marker3);
+        var latlng3 = [venue.location.lat,venue.location.lng];
+        console.log(latlng3);
+        list3.push(latlng3);
+        console.log(list3);
+        forClear3.push(marker3);
       }
 });
 });
@@ -294,15 +292,14 @@ $("#upcoming-venue").click(function(e) {
 $("#clear").click(function(e) {
   page=1;
 
-  _.each(forClear,function(marker,polyline) {
-    map.removeLayer(marker,polyline);
+  _.each(forClear,function(marker) {
+    map.removeLayer(marker);
   });
   _.each(forClear2,function(marker,polyline) {
     map.removeLayer(marker,polyline);
   });
 
-
-  _.each(list3,function(marker) {
+  _.each(forClear3,function(marker) {
     map.removeLayer(marker);
   });
 

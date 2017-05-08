@@ -20,18 +20,47 @@
         <div class="sidebar">
           <h2 id="choice">Welcome to Gig Map</h2>
           <label for="artist">Enter the name of the artist</label>
-          <input id="artist-name" type="text" placeholder="e.g. Gorillaz"><br></br>
-          <button id="past">See past tours</button><br></br>
-          <button id="upcoming-artist">See upcoming events</button><br></br>
+          <input id="artist-name" type="text" placeholder="e.g. Queen"><br></br>
+          <div class="btn-group" role="group">
+          <button type="button" id="past">Past tours</button>
+          <button type="button" id="upcoming-artist">Upcoming tours</button>
+          </div>
 
-          <label for="city">Enter the name of the city</label>
-          <input id="city-name" type="text" placeholder="e.g. Philadelphia"><br></br>
-          <!-- <button id="city-venue">See popular venues</button><br></br> -->
-          <button id="upcoming-city">See upcoming events</button><br></br>
 
-          <label for="venue">Enter the name of the venue</label>
-          <input id="venue-name" type="text" placeholder="e.g. Union Transfer"><br></br>
-          <button id="upcoming-venue">See upcoming events</button><br></br>
+          <!--City-->
+          <!-- <label for="city">Enter the name of the city</label>
+          <input id="city-name" type="text" placeholder="e.g. New York"><br></br>
+          <button id="upcoming-city">Upcoming events</button><br></br> -->
+
+          <label for="city">See upcoming event of the city</label>
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button" id="upcoming-city">Go</button>
+                </span>
+                <input type="text" class="form-control" id="city-name" placeholder="e.g. New York">
+              </div><!-- /input-group -->
+            </div><!-- /.col-lg-6 -->
+          </div><!-- /.row -->
+
+
+          <!--Venue  -->
+          <label for="venue">Locate venue on the map</label>
+          <!-- <input id="venue-name" type="text" placeholder="e.g. Union Transfer"><br></br>
+          <button id="upcoming-venue">Locate Venue</button><br></br> -->
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button" id="upcoming-venue">Locate</button>
+                </span>
+                <input type="text" class="form-control" id="venue-name" placeholder="e.g. Union Transfer">
+              </div><!-- /input-group -->
+            </div><!-- /.col-lg-6 -->
+          </div><!-- /.row -->
+
+
 
           <button id="clear">clear search</button><br></br>
         </div>
@@ -46,6 +75,7 @@
   <!-- Javascript Imports -->
   <script src="js/moment.js"></script>
   <!--underscore, jquery,bootstrap,carto,leaflet-->
+  <script src='https://api.mapbox.com/mapbox.js/plugins/arc.js/v0.1.0/arc.js'></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
