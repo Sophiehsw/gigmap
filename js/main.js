@@ -1,16 +1,3 @@
-// Leaflet map setup
-// var map = L.map('map', {
-//   center: [28.295883, -9.135754],
-//   zoom: 1.5
-// });
-//
-// var Stamen_TonerLite = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
-//   attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-//   subdomains: 'abcd',
-//   minZoom: 0,
-//   maxZoom: 20,
-//   ext: 'png'
-// }).addTo(map);
 
 var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',{
   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
@@ -261,6 +248,7 @@ var getVenueevents = function(venueID){
 };
 
 
+
 //past button
 $("#past").click(function(e) {
   map.setView([22.349052, 17.396109], 2);
@@ -300,6 +288,7 @@ $("#upcoming-venue").click(function(e) {
 
 //clear button
 $("#clear").click(function(e) {
+  page=1;
   _.each(list,function(marker) {
     map.removeLayer(marker);
   });
