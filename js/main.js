@@ -99,14 +99,14 @@ var getPastVenues = function(artistID){
   _.map(dataReturn.resultsPage.results.event, function(venue){
       if(venue.location.lat !== null && venue.location.lng !== null){
         var marker = L.circleMarker({lat: venue.location.lat,lng: venue.location.lng} ,
-          {color: "#A8D8B9", fillColor: "#A8D8B9"}
+          {color: "#A8D8B9", fillColor: "#A8D8B9",weight:0.5}
         ).bindPopup(venue.location.city + " " + venue.start.date).addTo(map);
         marker.setRadius(6);
         var latlng = [venue.location.lat,venue.location.lng];
         console.log(latlng);
         list.push(latlng);
         console.log(list);
-        newLine = L.polyline(list, {color: "#A8D8B9"}).addTo(map);
+        newLine = L.polyline(list, {color: "#A8D8B9", weight: 0.5}).addTo(map);
         forClear.push(marker,newLine);
         //map.flyTo({lat:venue.location.lat, lng:venue.location.lng},5,0.5);
 
@@ -137,20 +137,20 @@ var getUpcomingVenues = function(artistID){
   _.map(dataReturn2.resultsPage.results.event, function(venue){
       if(venue.location.lat !== null && venue.location.lng !== null){
         var marker2 = L.circleMarker({lat: venue.location.lat,lng: venue.location.lng} ,
-          {color: "#D0104C",fillColor: "#D0104C"}
-        ).bindPopup(venue.location.city + " " + venue.start.date)  //url to songkick event page: venue.uri
+          {color: "#D0104C",fillColor: "#D0104C", weight:0.5}
+        ).bindPopup(venue.location.city + " " + venue.start.date).addTo(map);  //url to songkick event page: venue.uri
         var latlng2 = [venue.location.lat,venue.location.lng];
         console.log(latlng2);
         list2.push(latlng2);
         console.log(list2);
         marker2.setRadius(6);
-window.setInterval(function() {
-    marker2.setLatLng(list2);
-},50);
+// window.setInterval(function() {
+//     marker2.setLatLng(list2);
+// },50);
+//
+// marker2.addTo(map);
 
-marker2.addTo(map);
-
-        newLine2 = L.polyline(list2, {color: "#D0104C"}).addTo(map);
+        newLine2 = L.polyline(list2, {color: "#D0104C", weight:0.5}).addTo(map);
         forClear2.push(marker2,newLine2);
       }
 });
