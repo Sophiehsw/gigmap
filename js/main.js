@@ -19,7 +19,8 @@ functions:
 2.get past event and location
 3.get future event by artist/venue/...
 4.select by date and region
-5.animation
+5.animation: window setinterval
+6.zoom to point on click
 ===================== */
 var songkick_api= '2dleBwWTZC8F4EGh';
 var artistName,cityName,venueName;
@@ -113,8 +114,6 @@ var getPastVenues = function(artistID){
       }
 
 }) ;
-
-//console.log(lat,lng);
 
   });
 };
