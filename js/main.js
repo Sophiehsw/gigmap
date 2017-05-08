@@ -26,9 +26,9 @@ var artistName,cityName,venueName;
 var artistID, cityID,venueID;
 var dataReturn;
 
-var lat=[], lat2=[],lat3=[],lat4=[];
-var lng=[], lng2=[],lng3=[],lng4=[];
 var list=[], list2=[],list3=[],list4=[];
+var newLine,newLine2;
+var forClear=[],forClear2=[];
 
 
 var searchArtist = function(artistName) {
@@ -102,24 +102,22 @@ var getPastVenues = function(artistID){
           {color: "#A8D8B9", fillColor: "#A8D8B9"}
         ).bindPopup(venue.location.city + " " + venue.start.date).addTo(map);
         marker.setRadius(6);
-        lat.push(venue.location.lat);
-        lng.push(venue.location.lng);
-        list.push(marker);
+        var latlng = [venue.location.lat,venue.location.lng];
+        console.log(latlng);
+        list.push(latlng);
+        console.log(list);
+        newLine = L.polyline(list, {color: "#A8D8B9"}).addTo(map);
+        forClear.push(marker,newLine);
+        //map.flyTo({lat:venue.location.lat, lng:venue.location.lng},5,0.5);
+
       }
+
 }) ;
 
 //console.log(lat,lng);
 
   });
 };
-
-// var getPast = function(artistID, totalPage){
-//   if (totalPage > 1 && page < totalPage){
-//     page = page+1;
-//   getPastVenues();
-//   console.log(page);
-//   }
-// };
 
 //UPCOMING EVENTS
 //1.Artist
@@ -142,13 +140,14 @@ var getUpcomingVenues = function(artistID){
           {color: "#D0104C",fillColor: "#D0104C"}
         ).bindPopup(venue.location.city + " " + venue.start.date).addTo(map);   //url to songkick event page: venue.uri
         marker2.setRadius(6);
-        lat2.push(venue.location.lat);
-        lng2.push(venue.location.lng);
-        list2.push(marker2);
+        var latlng2 = [venue.location.lat,venue.location.lng];
+        console.log(latlng2);
+        list2.push(latlng2);
+        console.log(list2);
+        newLine2 = L.polyline(list2, {color: "#D0104C"}).addTo(map);
+        forClear2.push(marker2,newLine2);
       }
 });
-
-console.log(lat2,lng2);
 
   });
 };
@@ -289,12 +288,15 @@ $("#upcoming-venue").click(function(e) {
 //clear button
 $("#clear").click(function(e) {
   page=1;
-  _.each(list,function(marker) {
-    map.removeLayer(marker);
+
+  _.each(forClear,function(marker,polyline) {
+    map.removeLayer(marker,polyline);
   });
-  _.each(list2,function(marker) {
-    map.removeLayer(marker);
+  _.each(forClear2,function(marker,polyline) {
+    map.removeLayer(marker,polyline);
   });
+
+
   _.each(list3,function(marker) {
     map.removeLayer(marker);
   });
