@@ -9,7 +9,6 @@ var map = L.map('map',{
 }).addLayer(tiles);
 
 /* =====================
-setlist.fm api: c78418f6-21c9-4878-80bd-f28f32fbb934
 songkick api: 2dleBwWTZC8F4EGh
 
 functions:
@@ -18,11 +17,6 @@ functions:
 3.get future event by artist/venue/...
 4.select by date and region
 5.animation: window setinterval
-6.zoom to point on click
-reference:
-https://www.mapbox.com/mapbox.js/example/v1.0.0/animating-flight-paths/
-https://github.com/odelevingne/gigLister/blob/master/src/scripts/songkick.js
-https://github.com/xsaardo/Setlist-fm-Playlists/blob/master/search.js
 ===================== */
 var songkick_api= '2dleBwWTZC8F4EGh';
 var artistName,cityName,venueName;
@@ -146,16 +140,16 @@ var getUpcomingVenues = function(artistID){
         list2.push(latlng2);
         console.log(list2);
         marker2.setRadius(6);
+        forClear2.push(marker2);
 // window.setInterval(function() {
 //     marker2.setLatLng(list2);
 // },50);
 //
 // marker2.addTo(map);
-        newLine2 = L.polyline(list2, {color: "#D0104C", weight:1}).addTo(map);
-        forClear2.push(marker2,newLine2);
       }
 });
-
+newLine2 = L.polyline(list2, {color: "#D0104C", weight:1}).addTo(map);
+forClear2.push(newLine2);
   });
 };
 
@@ -250,18 +244,11 @@ var getVenueevents = function(venueID){
     var dataReturn4 = data;
     console.log(dataReturn4);
 
-  _.map(dataReturn4.resultsPage.results.event, function(venue){
-      if(venue.venue.lat !== null && venue.venue.lng !== null){
-        // var marker4 = L.circleMarker({lat: venue.venue.lat,lng: venue.venue.lng} , {color: "#D0104C"}).bindPopup(venue.performance.displayName).addTo(map);
-        // lat4.push(venue.venue.lat);
-        // lng4.push(venue.venue.lng);
-        // list4.push(marker4);
-      }
-});
-});
+        var marker4 = L.circleMarker({lat: dataReturn4.resultsPage.results.event[0]["location"]["lat"],lng: dataReturn4.resultsPage.results.event[0]["location"]["lng"]} ,
+        {color: "#D0104C"}).bindPopup(dataReturn4.resultsPage.results.event[0]["displayName"]).addTo(map);
+        forClear4.push(marker4);
+      });
 };
-
-
 
 //past button
 $("#past").click(function(e) {
@@ -270,8 +257,6 @@ $("#past").click(function(e) {
   searchArtist(artistName).done(function(){
     gettotalPage(artistID);
     getPastVenues(artistID);
-
-
 });
 });
 
@@ -303,7 +288,10 @@ $("#upcoming-venue").click(function(e) {
 //clear button
 $("#clear").click(function(e) {
   page=1;
-
+  list =[];
+  list2 =[];
+  list3 =[];
+  list4 =[];
   _.each(forClear,function(marker) {
     map.removeLayer(marker);
   });
@@ -315,7 +303,7 @@ $("#clear").click(function(e) {
     map.removeLayer(marker);
   });
 
-  _.each(list4,function(marker) {
+  _.each(forClear4,function(marker) {
     map.removeLayer(marker);
   });
 

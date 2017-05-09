@@ -43,7 +43,14 @@ button,select {
 }
 
 input{
-  width:175px;
+  width:200px;
+  border: none;
+  padding: 6px 10px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  font-family: sans-serif;
+  border-radius: 6px;
 }
 
 .sidebar {
