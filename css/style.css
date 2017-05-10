@@ -51,7 +51,7 @@ body {
   font-family: fantasy;
   font-weight: bold;
   font-size: 24px;
-  color:black;
+  color:#FEDFE1;
   /*text-shadow: 2px 2px #FEDFE1;*/
 }
 
@@ -133,7 +133,7 @@ input{
 
 .sidebar {
   position: absolute;
-  background-color:#8A6BBE;
+  background-color:#113285;
   color:#FEDFE1;
   left: 0px;
   width: 400px;
