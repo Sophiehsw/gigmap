@@ -16,7 +16,7 @@ var dataReturn;
 var list=[], list2=[],list3=[],list4=[];
 var newLine,newLine2;
 var forClear=[],forClear2=[],forClear3=[],forClear4=[];
-var markerb, marker2b;
+var marker2a, marker2b;
 
 var geojson = { type: 'LineString', coordinates: [] };
 var geojson2 = { type: 'LineString', coordinates: [] };
@@ -157,7 +157,8 @@ else{
     });
     newLine2 = L.polyline(list2, {color: "#D0104C", weight:1}).addTo(map);
     forClear2.push(newLine2);
-    marker2b = L.circleMarker([0, 0], {color: "#FFB11B",fillColor: "#FFB11B",weight:2.5,fillOpacity:0.3}).bindTooltip(dataReturn2.resultsPage.results.event[0]["location"]["city"] + " " + dataReturn2.resultsPage.results.event[0]["start"]["date"]).addTo(map);
+    marker2a = L.circleMarker([list2[0][0],  list2[0][1]], {color: "#FFB11B",fillColor: "#FFB11B",weight:2.5,fillOpacity:0.3}).bindTooltip(dataReturn2.resultsPage.results.event[0]["location"]["city"] + " " + dataReturn2.resultsPage.results.event[0]["start"]["date"]).addTo(map);
+    marker2b = L.circleMarker([0, 0], {color: "#FFB11B",fillColor: "#FFB11B",weight:2.5,fillOpacity:0.3}).addTo(map);
     marker2b.setLatLng(L.latLng(
         list2[0][0],  list2[0][1]));
         var j = 0;
@@ -168,7 +169,7 @@ else{
                 geojson2.coordinates[j][1]));
             if (++j < geojson2.coordinates.length) setTimeout(tick, 200);
         }
-forClear2.push(marker2b);
+forClear2.push(marker2b,marker2a);
 }
   });
 
