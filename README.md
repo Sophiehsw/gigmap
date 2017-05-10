@@ -1,5 +1,5 @@
 # Worldwide Tour Map
-Final project submission for MUSA 611 Javascript Programming and MUSA 620: Data Wrangling and Data Visualization  
+Final project submission for MUSA 611: Javascript Programming and MUSA 620: Data Wrangling and Data Visualization  
 #### 
 Created by Yue Guo (Penn Design 17')
 #### 
