@@ -88,7 +88,7 @@ var getPastVenues = function(artistID){
     _.map(dataReturn.resultsPage.results.event, function(venue){
       if(venue.location.lat !== null && venue.location.lng !== null){
         var marker = L.circleMarker({lat: venue.location.lat,lng: venue.location.lng} ,
-          {color: "#A8D8B9", fillColor: "#A8D8B9",weight:2,fillOpacity:0.5}
+          {color: "#1CAEA8", fillColor: "#1CAEA8",weight:2,fillOpacity:0.5}
         ).bindTooltip(venue.location.city + " " + venue.start.date).addTo(map);
         marker.setRadius(6);
         latlng = [venue.location.lat,venue.location.lng];
@@ -141,7 +141,7 @@ else{
     _.map(dataReturn2.resultsPage.results.event, function(venue){
       if(venue.location.lat !== null && venue.location.lng !== null){
         var marker2 = L.circleMarker({lat: venue.location.lat,lng: venue.location.lng} ,
-          {color: "#D0104C",fillColor: "#D0104C", weight:2.5,fillOpacity:0.3}
+          {color: "#CC4A7F",fillColor: "#CC4A7F", weight:2.5,fillOpacity:0.3}
         ).bindTooltip(venue.location.city + " " + venue.start.date).addTo(map);  //url to songkick event page: venue.uri
         var latlng2 = [venue.location.lat,venue.location.lng];
         //console.log(latlng2);
@@ -155,7 +155,7 @@ else{
 
       }
     });
-    newLine2 = L.polyline(list2, {color: "#D0104C", weight:1}).addTo(map);
+    newLine2 = L.polyline(list2, {color: "#CC4A7F", weight:1}).addTo(map);
     forClear2.push(newLine2);
     marker2a = L.circleMarker([list2[0][0],  list2[0][1]], {color: "#FFB11B",fillColor: "#FFB11B",weight:2.5,fillOpacity:0.3}).bindTooltip(dataReturn2.resultsPage.results.event[0]["location"]["city"] + " " + dataReturn2.resultsPage.results.event[0]["start"]["date"]).addTo(map);
     marker2b = L.circleMarker([0, 0], {color: "#FFB11B",fillColor: "#FFB11B",weight:2.5,fillOpacity:0.3}).addTo(map);
@@ -169,6 +169,7 @@ else{
                 geojson2.coordinates[j][1]));
             if (++j < geojson2.coordinates.length) setTimeout(tick, 200);
         }
+        //marker2b.bindTooltip(dataReturn2.resultsPage.results.event[geojson2.coordinates.length]["location"]["city"] + " " + dataReturn2.resultsPage.results.event[geojson2.coordinates.length]["start"]["date"]).addTo(map);
 forClear2.push(marker2b,marker2a);
 }
   });
