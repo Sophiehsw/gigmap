@@ -8,16 +8,6 @@ var map = L.map('map',{
   doubleClickZoom: true
 }).addLayer(tiles);
 
-/* =====================
-songkick api: 2dleBwWTZC8F4EGh
-
-functions:
-1.search artist by name and get artist id
-2.get past event and location
-3.get future event by artist/venue/...
-4.select by date and region
-5.animation: window setinterval
-===================== */
 var songkick_api= '2dleBwWTZC8F4EGh';
 var artistName,cityName,venueName;
 var artistID, cityID,venueID;
@@ -90,11 +80,6 @@ var getPastVenues = function(artistID){
     }
     dataReturn = data;
     console.log(dataReturn);
-    // markerb = L.circleMarker(
-    //   [dataReturn.resultsPage.results.event[0]["location"]["lat"],  dataReturn.resultsPage.results.event[0]["location"]["lng"]],
-    //   {color: "#FFB11B",fillColor: "#FFB11B",weight:2.5,fillOpacity:0.3
-    // }).bindTooltip(dataReturn.resultsPage.results.event[0]["location"]["city"] + dataReturn.resultsPage.results.event[0]["displayName"]).addTo(map);
-
     _.map(dataReturn.resultsPage.results.event, function(venue){
       if(venue.location.lat !== null && venue.location.lng !== null){
         var marker = L.circleMarker({lat: venue.location.lat,lng: venue.location.lng} ,
@@ -103,13 +88,7 @@ var getPastVenues = function(artistID){
         marker.setRadius(6);
         var latlng = [venue.location.lat,venue.location.lng];
         list.push(latlng);
-        //console.log(list);
-        //newLine = L.polyline(list, {color: "#A8D8B9", weight: 0.5}).addTo(map);
         forClear.push(marker);//,newLine);
-        //map.flyTo({lat:venue.location.lat, lng:venue.location.lng},5,0.5);
-        // window.setInterval(function() {
-        //     marker2.setLatLng(list2);
-        // },50);
 
       }
     });
@@ -155,14 +134,6 @@ var getUpcomingVenues = function(artistID){
     marker2b.setLatLng(L.latLng(
         list2[0][0],  list2[0][1]));
 forClear2.push(marker2b);
-        // var t = 0;
-// window.setInterval(function() {
-//     for (var i = 0; i < list2.length; i++) {
-//     marker2b.setLatLng(L.latLng(
-//         list2[i][0],
-//         list2[i][1]))};
-//     t += 0.1;
-//   }, 50);
 
   });
 
@@ -245,25 +216,25 @@ var searchVenue = function(venueName) {
   });
 };
 
-//upcoming event search
-var getVenueevents = function(venueID){
-  $.ajax({
-    type: "GET",
-    url:"https://cors-anywhere.herokuapp.com/api.songkick.com/api/3.0/venues/" + venueID + "&page= "+ "/calendar.json",
-    data: {
-      query: venueID,
-      apikey: songkick_api
-    }
-  }).done(function(data){
-    console.log(data);
-    var dataReturn4 = data;
-    console.log(dataReturn4);
-
-    var marker4 = L.circleMarker({lat: dataReturn4.resultsPage.results.event[0]["location"]["lat"],lng: dataReturn4.resultsPage.results.event[0]["location"]["lng"]} ,
-    {color: "#D0104C"}).bindPopup(dataReturn4.resultsPage.results.event[0]["displayName"]).addTo(map);
-    forClear4.push(marker4);
-  });
-};
+// //upcoming event search
+// var getVenueevents = function(venueID){
+//   $.ajax({
+//     type: "GET",
+//     url:"https://cors-anywhere.herokuapp.com/api.songkick.com/api/3.0/venues/" + venueID + "&page= "+ "/calendar.json",
+//     data: {
+//       query: venueID,
+//       apikey: songkick_api
+//     }
+//   }).done(function(data){
+//     console.log(data);
+//     var dataReturn4 = data;
+//     console.log(dataReturn4);
+//
+//     var marker4 = L.circleMarker({lat: dataReturn4.resultsPage.results.event[0]["location"]["lat"],lng: dataReturn4.resultsPage.results.event[0]["location"]["lng"]} ,
+//     {color: "#D0104C"}).bindPopup(dataReturn4.resultsPage.results.event[0]["displayName"]).addTo(map);
+//     forClear4.push(marker4);
+//   });
+// };
 
 //past button
 $("#past").click(function(e) {
@@ -272,8 +243,7 @@ $("#past").click(function(e) {
   searchArtist(artistName).done(function(){
     gettotalPage(artistID);
     getPastVenues(artistID);
-      // markerb.setLatLng(L.latLng(
-      //   list[0][0],  list[0][1]));
+
   });
 });
 
@@ -308,7 +278,7 @@ $("#clear").click(function(e) {
   list =[];
   list2 =[];
   list3 =[];
-  list4 =[];
+
   _.each(forClear,function(marker) {
     map.removeLayer(marker);
   });
@@ -320,13 +290,13 @@ $("#clear").click(function(e) {
     map.removeLayer(marker);
   });
 
-  _.each(forClear4,function(marker) {
+  _.each(list4,function(marker) {
     map.removeLayer(marker);
   });
 
   $("#artist-name").val('');
   $("#city-name").val('');
   $('#venue-name').val('');
-  $("#choice").text("Welcome to Gig Map");
+  $("#choice").text("Enjoy!");
   map.setView([22.349052, 17.396109], 2);
 });

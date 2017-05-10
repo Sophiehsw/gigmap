@@ -1,8 +1,8 @@
 
 body {
-    padding: 0;
-    font-family: helvetica, arial, sans-serif;
-    overflow: hidden;
+  padding: 0;
+  font-family: helvetica, arial, sans-serif;
+  overflow: hidden;
 }
 .btn-group{
   position: relative;
@@ -22,28 +22,92 @@ body {
 
 .map {
   position: absolute;
-  left: 325px;
+  left: 400px;
   right: 0;
   bottom: 0;
   top: 0;
 }
 
-
-button,select {
-  /*background-color: #A8D8B9;*/
-  /*color:#3A3226;*/
-  border: none;
-  padding: 6px 10px;
-  /*text-align: center;*/
-  text-decoration: none;
-  display: inline-block;
-  font-size: 12px;
-  font-family: sans-serif;
-  border-radius: 6px;
+#site-title{
+  font-family:fantasy;
+  font-size: 30px;
+  color:#FEDFE1;
+  position: absolute;
+  top:0px;
+  text-shadow: 2px 2px #D0104C;
 }
 
-input{
-  width:200px;
+.intro{
+  font-size: 13px;
+  position: relative;
+  top:45px;
+  color: #FEDFE1;
+  font-family: arial,sans-serif;
+}
+
+#choice{
+  position:relative;
+  top:35px;
+  font-family: fantasy;
+  font-weight: bold;
+  font-size: 24px;
+  color:#FEDFE1;
+  /*text-shadow: 2px 2px #D0104C;*/
+}
+
+#past{
+  position: relative;
+  left:160px;
+  top:-10px;
+  background-color: #A8D8B9;
+}
+
+#upcoming-artist{
+  position: relative;
+  left:160px;
+  top:-10px;
+  background-color: #D0104C;
+  color:white;
+}
+
+#upcoming-city{
+  position: relative;
+  left:160px;
+  top:-48px;
+  background-color: #E9CD4C;
+}
+
+#upcoming-venue{
+  position: relative;
+  left:160px;
+  top:-128px;
+  background-color: #F05E1C;
+}
+
+#venue-name{
+  position:relative;
+  top:-80px;
+}
+
+#alert{
+  position:relative;
+  bottom:100px;
+}
+body > div.container > div > div > label:nth-child(4),#artist-name{
+  position:relative;
+  top:39px;
+}
+
+body > div.container > div > div > label:nth-child(9),#city-name{
+  position:relative;
+  top:0px;
+}
+
+body > div.container > div > div > label:nth-child(17){
+  position:relative;
+  top:-60px;
+}
+button,select {
   border: none;
   padding: 6px 10px;
   text-decoration: none;
@@ -51,13 +115,28 @@ input{
   font-size: 12px;
   font-family: sans-serif;
   border-radius: 6px;
+  color:black;
+}
+
+
+input{
+  width:150px;
+  border: none;
+  padding: 6px 10px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  font-family: sans-serif;
+  border-radius: 6px;
+  color:black;
 }
 
 .sidebar {
   position: absolute;
-  background-color: #8EC7CC;
+  background-color:#8A6BBE;
+  color:#FEDFE1;
   left: 0px;
-  width: 325px;
+  width: 400px;
   top: 0;
   bottom: 0;
   padding: 20px;
@@ -65,13 +144,7 @@ input{
   overflow-y: auto;
 }
 
-#choice{
-  position:relative;
-  top:-20px;
-  font-family: Franklin Gothic Demi Cond, serif;
-  font-weight: bold;
-}
 #clear{
-  position: absolute;
-  bottom: 45px;
+  position: relative;
+  top: -100px;
 }
