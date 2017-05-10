@@ -111,7 +111,7 @@ var getUpcomingVenues = function(artistID){
       $('#alert').show();
       $('#alert2').show();
     }
-
+else{
     var dataReturn2 = data;
     console.log(dataReturn2);
 
@@ -135,7 +135,7 @@ var getUpcomingVenues = function(artistID){
     marker2b.setLatLng(L.latLng(
         list2[0][0],  list2[0][1]));
 forClear2.push(marker2b);
-
+}
   });
 
 };
