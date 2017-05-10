@@ -19,7 +19,7 @@ var forClear=[],forClear2=[],forClear3=[],forClear4=[];
 var markerb, marker2b;
 
 $('#alert').hide();
-
+$('#alert2').hide();
 var searchArtist = function(artistName) {
   return $.ajax({
     type: "GET",
@@ -109,6 +109,7 @@ var getUpcomingVenues = function(artistID){
     console.log(data);
     if(data.resultsPage.totalEntries === 0){
       $('#alert').show();
+      $('#alert2').show();
     }
 
     var dataReturn2 = data;

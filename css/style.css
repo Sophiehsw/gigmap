@@ -93,6 +93,10 @@ body {
 
 #alert{
   position:relative;
+  top: -120px;
+}
+#alert2{
+  position:relative;
   top: -90px;
 }
 body > div.container > div > div > label:nth-child(4),#artist-name{
