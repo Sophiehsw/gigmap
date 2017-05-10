@@ -215,7 +215,7 @@ var getCityevents = function(cityID){
 
     _.map(dataReturn3.resultsPage.results.event, function(venue){
       if(venue.location.lat !== null && venue.location.lng !== null){
-        var marker3 = L.circleMarker({lat: venue.location.lat,lng: venue.location.lng} , {color:"#E9CD4C", fillColor: "#E9CD4C"}).bindPopup(venue.displayName).addTo(map);
+        var marker3 = L.circleMarker({lat: venue.location.lat,lng: venue.location.lng} , {color:"#E9CD4C", fillColor: "#E9CD4C"}).bindTooltip(venue.displayName).addTo(map);
         marker3.setRadius(6);
         map.setView({lat: venue.location.lat,lng: venue.location.lng}, 12);
         var latlng3 = [venue.location.lat,venue.location.lng];
@@ -245,7 +245,7 @@ var searchVenue = function(venueName) {
     }
     console.log(data.resultsPage.results.venue[0]["displayName"]);
     venueID = data.resultsPage.results.venue[0]["id"];
-    var venueMarker = L.circleMarker({lat: data.resultsPage.results.venue[0]["lat"],lng: data.resultsPage.results.venue[0]["lng"]} , {color:"#F05E1C",fillColor: "#F05E1C"}).bindPopup(data.resultsPage.results.venue[0]["displayName"]).addTo(map);
+    var venueMarker = L.circleMarker({lat: data.resultsPage.results.venue[0]["lat"],lng: data.resultsPage.results.venue[0]["lng"]} , {color:"#F05E1C",fillColor: "#F05E1C"}).bindTooltip(data.resultsPage.results.venue[0]["displayName"]).addTo(map);
     map.setView({lat: data.resultsPage.results.venue[0]["lat"],lng: data.resultsPage.results.venue[0]["lng"]}, 14);
     list4.push(venueMarker);
     $("#choice").text("Showing results for: " + data.resultsPage.results.venue[0]["displayName"]);
