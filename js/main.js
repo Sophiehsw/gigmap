@@ -18,6 +18,8 @@ var newLine,newLine2;
 var forClear=[],forClear2=[],forClear3=[],forClear4=[];
 var markerb, marker2b;
 
+var geojson = { type: 'LineString', coordinates: [] };
+
 $('#alert').hide();
 $('#alert2').hide();
 var searchArtist = function(artistName) {
@@ -121,9 +123,12 @@ else{
           {color: "#D0104C",fillColor: "#D0104C", weight:2.5,fillOpacity:0.3}
         ).bindTooltip(venue.location.city + " " + venue.start.date).addTo(map);  //url to songkick event page: venue.uri
         var latlng2 = [venue.location.lat,venue.location.lng];
-        console.log(latlng2);
+        //console.log(latlng2);
         list2.push(latlng2);
-        console.log(list2);
+        //console.log(list2);
+        geojson.coordinates.push(latlng2);
+        console.log(geojson.coordinates);
+        //L.geoJson(geojson).addTo(map);
         marker2.setRadius(6);
         forClear2.push(marker2);
 
@@ -134,6 +139,19 @@ else{
     marker2b = L.circleMarker([0, 0], {color: "#FFB11B",fillColor: "#FFB11B",weight:2.5,fillOpacity:0.3}).bindTooltip(dataReturn2.resultsPage.results.event[0]["location"]["city"] + " " + dataReturn2.resultsPage.results.event[0]["start"]["date"]).addTo(map);
     marker2b.setLatLng(L.latLng(
         list2[0][0],  list2[0][1]));
+        var j = 0;
+        tick();
+        function tick() {
+            // Set the marker to be at the same point as one
+            // of the segments or the line.
+            marker2b.setLatLng(L.latLng(
+                geojson.coordinates[j][0],
+                geojson.coordinates[j][1]));
+
+            // Move to the next point of the line
+            // until `j` reaches the length of the array.
+            if (++j < geojson.coordinates.length) setTimeout(tick, 100);
+        };
 forClear2.push(marker2b);
 }
   });
