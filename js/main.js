@@ -36,7 +36,7 @@ var searchArtist = function(artistName) {
     else{
       console.log(data.resultsPage.results.artist[0]["displayName"]);
       artistID = data.resultsPage.results.artist[0]["id"];
-      $("#choice").text(data.resultsPage.results.artist[0]["displayName"]);
+      $("#choice").text("Showing results for: " + data.resultsPage.results.artist[0]["displayName"]);
       console.log(artistID);
     }
   });
@@ -153,7 +153,7 @@ var searchCity = function(cityName) {
     console.log(data);
     console.log(data.resultsPage.results.location[0]["metroArea"]["displayName"]);
     cityID = data.resultsPage.results.location[0]["metroArea"]["id"];
-    $("#choice").text(data.resultsPage.results.location[0]["metroArea"]["displayName"]);
+    $("#choice").text("Showing results for: " + data.resultsPage.results.location[0]["metroArea"]["displayName"]);
     console.log(cityID);
   });
 };
@@ -211,7 +211,7 @@ var searchVenue = function(venueName) {
     var venueMarker = L.circleMarker({lat: data.resultsPage.results.venue[0]["lat"],lng: data.resultsPage.results.venue[0]["lng"]} , {color:"#F05E1C",fillColor: "#F05E1C"}).bindPopup(data.resultsPage.results.venue[0]["displayName"]).addTo(map);
     map.setView({lat: data.resultsPage.results.venue[0]["lat"],lng: data.resultsPage.results.venue[0]["lng"]}, 14);
     list4.push(venueMarker);
-    $("#choice").text(data.resultsPage.results.venue[0]["displayName"]);
+    $("#choice").text("Showing results for: " + data.resultsPage.results.venue[0]["displayName"]);
     console.log(venueID);
   });
 };
