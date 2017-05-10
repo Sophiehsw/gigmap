@@ -19,6 +19,9 @@ var forClear=[],forClear2=[],forClear3=[],forClear4=[];
 var markerb, marker2b;
 
 var geojson = { type: 'LineString', coordinates: [] };
+var geojson2 = { type: 'LineString', coordinates: [] };
+
+var latlng;
 
 $('#alert').hide();
 $('#alert2').hide();
@@ -88,14 +91,32 @@ var getPastVenues = function(artistID){
           {color: "#A8D8B9", fillColor: "#A8D8B9",weight:2,fillOpacity:0.5}
         ).bindTooltip(venue.location.city + " " + venue.start.date).addTo(map);
         marker.setRadius(6);
-        var latlng = [venue.location.lat,venue.location.lng];
+        latlng = [venue.location.lat,venue.location.lng];
+        geojson.coordinates.push(latlng);
+        //console.log(geojson.coordinates);
         list.push(latlng);
         forClear.push(marker);//,newLine);
 
       }
     });
+
   });
 };
+
+// var pastAnimated = function(artistID){
+//   markerb = L.circleMarker([0, 0], {color: "#FFB11B",fillColor: "#FFB11B",weight:2.5,fillOpacity:0.3}).bindTooltip(dataReturn.resultsPage.results.event[0]["location"]["city"] + " " + dataReturn.resultsPage.results.event[0]["start"]["date"]).addTo(map);
+//   markerb.setLatLng(L.latLng(
+//       geojson.coordinates[0][0],  geojson.coordinates[0][1]));
+//       var i = 0;
+//       tick();
+//       function tick() {
+//           markerb.setLatLng(L.latLng(
+//               geojson.coordinates[i][0],
+//               geojson.coordinates[i][1]));
+//           if (++i < geojson.coordinates.length) setTimeout(tick, 200);
+//       }
+//   forClear.push(markerb);
+// };
 
 //UPCOMING EVENTS
 //1.Artist
@@ -126,8 +147,8 @@ else{
         //console.log(latlng2);
         list2.push(latlng2);
         //console.log(list2);
-        geojson.coordinates.push(latlng2);
-        console.log(geojson.coordinates);
+        geojson2.coordinates.push(latlng2);
+        console.log(geojson2.coordinates);
         //L.geoJson(geojson).addTo(map);
         marker2.setRadius(6);
         forClear2.push(marker2);
@@ -142,16 +163,11 @@ else{
         var j = 0;
         tick();
         function tick() {
-            // Set the marker to be at the same point as one
-            // of the segments or the line.
             marker2b.setLatLng(L.latLng(
-                geojson.coordinates[j][0],
-                geojson.coordinates[j][1]));
-
-            // Move to the next point of the line
-            // until `j` reaches the length of the array.
-            if (++j < geojson.coordinates.length) setTimeout(tick, 100);
-        };
+                geojson2.coordinates[j][0],
+                geojson2.coordinates[j][1]));
+            if (++j < geojson2.coordinates.length) setTimeout(tick, 200);
+        }
 forClear2.push(marker2b);
 }
   });
@@ -234,26 +250,6 @@ var searchVenue = function(venueName) {
     console.log(venueID);
   });
 };
-
-// //upcoming event search
-// var getVenueevents = function(venueID){
-//   $.ajax({
-//     type: "GET",
-//     url:"https://cors-anywhere.herokuapp.com/api.songkick.com/api/3.0/venues/" + venueID + "&page= "+ "/calendar.json",
-//     data: {
-//       query: venueID,
-//       apikey: songkick_api
-//     }
-//   }).done(function(data){
-//     console.log(data);
-//     var dataReturn4 = data;
-//     console.log(dataReturn4);
-//
-//     var marker4 = L.circleMarker({lat: dataReturn4.resultsPage.results.event[0]["location"]["lat"],lng: dataReturn4.resultsPage.results.event[0]["location"]["lng"]} ,
-//     {color: "#D0104C"}).bindPopup(dataReturn4.resultsPage.results.event[0]["displayName"]).addTo(map);
-//     forClear4.push(marker4);
-//   });
-// };
 
 //past button
 $("#past").click(function(e) {
