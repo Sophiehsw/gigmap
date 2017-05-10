@@ -93,6 +93,7 @@ body {
 #city-name{
   position:relative;
   top:20px;
+  left:0px;
 }
 #alert{
   position:relative;
