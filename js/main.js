@@ -264,7 +264,7 @@ $("#past").click(function(e) {
 
 //future button
 $("#upcoming-artist").click(function(e) {
-  map.setView([22.349052, 17.396109], 2);
+  // map.setView([22.349052, 17.396109], 2);
   artistName= $('#artist-name').val();
   searchArtist(artistName).done(function(){
     getUpcomingVenues(artistID);
