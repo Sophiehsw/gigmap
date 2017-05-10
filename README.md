@@ -1,7 +1,9 @@
 # Worldwide Touring Map
 Final project submission for MUSA 611 Javascript Programming and MUSA 620: Data Wrangling and Data Visualization  
+#### 
 Created by Yue Guo (Penn Design 17')
-#### visit site at: https://amandayg.github.io/gigmap/
+#### 
+visit site at: https://amandayg.github.io/gigmap/
 
 ## Features
 This interactive web application is a handy tool for users to search for the tour history and upcoming events of the artists they are interested in. The app has a side bar on the left and a map on the right. The app takes in the user input and maps out the past tour locations of the artist requested, the upcoming events, as well as the route between each of the upcoming event, with the closest date in different color. Each event is plotted as dot on map, and shows location and date when mouse hovers on the dot. A dismissable alert will pop up if no entry is returned from the user input. There is also a "clear search" button at the end of the sidebar to reset the search and start again.
