@@ -32,6 +32,6 @@ Similar to artist gigography and calendar, metro area calendar API also requires
 ### Data Visualization 
 This app used JavaScript, Leaflet, HTML&CSS to visualize the past and upcoming concerts of musician and bands.
 ####
-I used light green color for the markers for past tours and rosy red for upcoming tours. User can move the mouse to each marker to see the name of the location and the date the musician toured the location. For upcoming tours, I also generated lines between one location and the next one and visualized the route of the upcoming tour in animation. The moving marker was larger and colored in orange.
+I used light green color for the markers for past tours and rosy red for upcoming tours. User can move the mouse to each marker to see the name of the location and the date the musician toured the location. For upcoming tours, I also generated lines between one location and the next one and visualized the route of the upcoming tour in animation. (I chose not to animate past tours for there were too many records and the animation looked messy.) The moving marker was larger and colored in orange.
 ####
 For city and venue search, the map will automatically zoom to the location requrested. I colored the upcoming events in the city that user search for in yellow and the venue in orange. User can click on the marker to see the artist and date of the upcoming events for city and the venue name for veue locate function.
