@@ -90,7 +90,10 @@ body {
   position:relative;
   top:-50px;
 }
-
+#city-name{
+  position:relative;
+  top:20px;
+}
 #alert{
   position:relative;
   top: -120px;
@@ -104,7 +107,7 @@ body > div.container > div > div > label:nth-child(4),#artist-name{
   top:50px;
 }
 
-body > div.container > div > div > label:nth-child(10),#city-name{
+body > div.container > div > div > label:nth-child(10){
   position:relative;
   top:20px;
 }
