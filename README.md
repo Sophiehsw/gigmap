@@ -6,7 +6,7 @@ Created by Yue Guo (Penn Design 17')
 visit site at: https://amandayg.github.io/gigmap/
 
 ## Features
-This interactive web application is a handy tool for users to search for the tour history and upcoming events of the artists they are interested in. The app has a side bar on the left and a map on the right. The app is able to map out the past tour locations, the upcoming events, as well as the route between each of the upcoming event, with the closest date in different color with the rest. Each event is plotted as a circle marker on the map, and shows location and date when mouse hovers on the marker. A dismissable alert will pop up if no entry is returned from the user input. There is also a "clear search" button at the end of the sidebar to reset the search and start again. Users can also search for upcoming events by city, and locate the venue on the map.
+This interactive web application is a handy tool for users to search for the tour history and upcoming events of the artists they are interested in. The app has a side bar on the left and a map on the right. The app is able to map out the past tour locations, the upcoming events, as well as the route of the upcoming tour in animation. Each event is plotted as a circle marker on the map, and shows location and date when mouse hovers on the marker. A dismissable alert will pop up if no entry is returned from the user input. There is also a "clear search" button at the end of the sidebar to reset the search and start again. Users can also search for upcoming events by city, and locate the venue on the map.
 
 ## Data and tools
 #### Songkick API 
@@ -31,5 +31,7 @@ Similar to artist gigography and calendar, metro area calendar API also requires
 
 ### Data Visualization 
 This app used JavaScript, Leaflet, HTML&CSS to visualize the past and upcoming concerts of musician and bands.
-I used light green color for the markers for past tours and rosy red for upcoming tours. User can move the mouse to each marker to see the name of the location and the date the musician toured the location. For upcoming tours, I also generated lines between one location and the next one to visualize the route of the upcoming tour. The place where musician will be first in the future is colored in orange and used larger marker.
+####
+I used light green color for the markers for past tours and rosy red for upcoming tours. User can move the mouse to each marker to see the name of the location and the date the musician toured the location. For upcoming tours, I also generated lines between one location and the next one and visualized the route of the upcoming tour in animation. The moving marker was larger and colored in orange.
+####
 For city and venue search, the map will automatically zoom to the location requrested. I colored the upcoming events in the city that user search for in yellow and the venue in orange. User can click on the marker to see the artist and date of the upcoming events for city and the venue name for veue locate function.
