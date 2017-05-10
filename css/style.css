@@ -29,8 +29,9 @@ body {
 }
 
 #site-title{
-  font-family:fantasy,serif;
+  font-family:fantasy,arial black, arial,serif;
   font-size: 32px;
+  font-weight: bold;
   color:#D0104C;
   position: absolute;
   top:0px;
@@ -49,7 +50,7 @@ body {
 #choice{
   position:relative;
   top:35px;
-  font-family: fantasy, serif;
+  font-family: fantasy,arial black, arial,serif;
   font-weight: bold;
   font-size: 24px;
   color:#141414;
