@@ -148,7 +148,7 @@ else{
         list2.push(latlng2);
         //console.log(list2);
         geojson2.coordinates.push(latlng2);
-        console.log(geojson2.coordinates);
+        // console.log(geojson2.coordinates);
         //L.geoJson(geojson).addTo(map);
         marker2.setRadius(6);
         forClear2.push(marker2);
