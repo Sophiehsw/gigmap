@@ -18,7 +18,7 @@ var newLine,newLine2;
 var forClear=[],forClear2=[],forClear3=[],forClear4=[];
 var marker2a, marker2b;
 
-var geojson = { type: 'LineString', coordinates: [] };
+// var geojson = { type: 'LineString', coordinates: [] };
 var geojson2 = { type: 'LineString', coordinates: [] };
 
 var latlng;
@@ -92,7 +92,7 @@ var getPastVenues = function(artistID){
         ).bindTooltip(venue.location.city + " " + venue.start.date).addTo(map);
         marker.setRadius(6);
         latlng = [venue.location.lat,venue.location.lng];
-        geojson.coordinates.push(latlng);
+        // geojson.coordinates.push(latlng);
         //console.log(geojson.coordinates);
         list.push(latlng);
         forClear.push(marker);//,newLine);
@@ -295,6 +295,16 @@ $("#clear").click(function(e) {
   list =[];
   list2 =[];
   list3 =[];
+  list4=[];
+
+// geojson = { type: 'LineString', coordinates: [] };
+geojson2 = { type: 'LineString', coordinates: [] };
+
+console.log(geojson2);
+
+  dataReturn=[];
+  dataReturn2=[];
+  dataReturn3=[];
 
   _.each(forClear,function(marker) {
     map.removeLayer(marker);

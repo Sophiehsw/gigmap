@@ -4,11 +4,12 @@ body {
   font-family: helvetica, arial, sans-serif;
   overflow: hidden;
 }
-.btn-group{
+
+/*.btn-group{
   position: relative;
   top:-10px;
   bottom: 20px;
-}
+}*/
 
 /*.header {
   position: absolute;
@@ -22,10 +23,13 @@ body {
 
 .map {
   position: absolute;
+  /*opacity: 0.5;*/
   left: 415px;
   right: 0;
   bottom: 0;
   top: 0;
+  height: auto;
+  width: auto;
 }
 
 #site-title{
